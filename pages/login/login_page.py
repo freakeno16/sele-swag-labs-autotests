@@ -1,8 +1,6 @@
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
 
-from pages.inventory_page import InventoryPage
-
 
 class LoginPage(BasePage):
     USERNAME_INPUT = (By.ID, "user-name")
@@ -13,6 +11,11 @@ class LoginPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.endpoint = ""
+
+    def login(self, username, password):
+        self.fill_username_field(username)
+        self.fill_password_field(password)
+        self.click_submit_button()
 
     def fill_username_field(self, username):
         self.find(self.USERNAME_INPUT).send_keys(username)
