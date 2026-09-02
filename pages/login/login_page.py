@@ -1,21 +1,27 @@
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
 
+from pages.inventory_page import InventoryPage
+
 
 class LoginPage(BasePage):
-    USERNAME_FIELD = (By.ID, "user-name")
-    PASSWORD_FIELD = (By.ID, "password")
+    USERNAME_INPUT = (By.ID, "user-name")
+    PASSWORD_INPUT = (By.ID, "password")
     SUBMIT_BUTTON = (By.ID, "login-button")
+    ERROR_MESSAGE = (By.CLASS_NAME, "error-message-container")
 
     def __init__(self, driver):
         super().__init__(driver)
         self.endpoint = ""
 
     def fill_username_field(self, username):
-        self.driver.find_element(*self.USERNAME_FIELD).send_keys(username)
+        self.find(self.USERNAME_INPUT).send_keys(username)
 
     def fill_password_field(self, password):
-        self.driver.find_element(*self.PASSWORD_FIELD).send_keys(password)
+        self.find(self.PASSWORD_INPUT).send_keys(password)
 
     def click_submit_button(self):
-        self.driver.find_element(*self.SUBMIT_BUTTON).click()
+        self.click(self.SUBMIT_BUTTON)
+
+    def check_error_message(self, error_text):
+        assert self.get_text(self.ERROR_MESSAGE) == error_text
