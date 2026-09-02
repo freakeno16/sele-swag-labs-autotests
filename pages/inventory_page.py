@@ -17,10 +17,14 @@ class InventoryPage(BasePage):
     def check_inventory_is_visible(self):
         assert self.find(self.INVENTORY).is_displayed()
 
+    def formate_prices(self):
+        inventory_prices = self.driver.find_elements(*self.INVENTORY_PRICE)
+        for price in inventory_prices:
+            print(price.text)
+        formatted_prices = [float(price.text.replace('$', '')) for price in inventory_prices]
+        print(formatted_prices)
+        return formatted_prices
+
     def sort_items_by(self, sort_type):
         select_field = Select(self.find(self.SORT_SELECT_FIELD))
-        inventory_prices = self.driver.find_elements(*self.INVENTORY_PRICE)
-
-        if sort_type == SORT_TYPES["price_low_to_high"]:
-            for l in inventory_prices:
-                print(l.text)
+        select_field.select_by_value(sort_type)
