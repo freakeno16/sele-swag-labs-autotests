@@ -5,7 +5,6 @@ from test_data.inventory.sort_types import SORT_TYPES
 
 
 class InventoryPage(BasePage):
-
     INVENTORY = (By.CSS_SELECTOR, "[data-test='inventory-list']")
     SORT_SELECT_FIELD = (By.CSS_SELECTOR, "[data-test='product-sort-container']")
     INVENTORY_ITEM = (By.CSS_SELECTOR, "[data-test='inventory-item']")
@@ -30,25 +29,18 @@ class InventoryPage(BasePage):
         select_field.select_by_value(sort_type)
 
     def check_items_sorting_by(self, sort_type):
-        if sort_type == SORT_TYPES["price_low_to_high"]:
-            formatted_prices = self.formate_prices()
-
-            assert sorted(formatted_prices) == formatted_prices
-
-        elif sort_type == SORT_TYPES["price_high_to_low"]:
-            formatted_prices = self.formate_prices()
-
-            assert sorted(formatted_prices, reverse=True) == formatted_prices
-
-        elif sort_type == SORT_TYPES["name_a_to_z"]:
-            inventory_names_elements = self.driver.find_elements(*self.INVENTORY_ITEM_NAME)
-            inventory_names = [name.text for name in inventory_names_elements]
-
-            assert inventory_names == sorted(inventory_names)
-
+        if sort_type in (
+            SORT_TYPES["price_low_to_high"],
+            SORT_TYPES["price_high_to_low"]
+        ):
+            actual_items = self.formate_prices()
         else:
             inventory_names_elements = self.driver.find_elements(*self.INVENTORY_ITEM_NAME)
-            inventory_names = [name.text for name in inventory_names_elements]
+            actual_items = [name.text for name in inventory_names_elements]
 
-            assert inventory_names == sorted(inventory_names, reverse=True)
+        reverse = sort_type in (
+            SORT_TYPES["price_high_to_low"],
+            SORT_TYPES["name_z_to_a"]
+        )
 
+        assert actual_items == sorted(actual_items, reverse=reverse)
