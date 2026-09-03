@@ -28,7 +28,4 @@ def auth_inventory_page(driver, valid_creds, login_page):
 
     inventory_page = InventoryPage(driver)
 
-    # alert = driver.switch_to.alert
-    # alert.accept()
-
     yield inventory_page
