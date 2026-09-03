@@ -5,6 +5,7 @@ from test_data.inventory.sort_types import SORT_TYPES
 
 
 class InventoryPage(BasePage):
+
     INVENTORY = (By.CLASS_NAME, "inventory_container")
     SORT_SELECT_FIELD = (By.CLASS_NAME, "product_sort_container")
     INVENTORY_ITEM = (By.CLASS_NAME, "inventory_item")
