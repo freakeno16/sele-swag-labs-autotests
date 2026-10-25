@@ -10,6 +10,7 @@ class InventoryPage(BasePage):
     INVENTORY_ITEM = (By.CSS_SELECTOR, "[data-test='inventory-item']")
     INVENTORY_ITEM_PRICE = (By.CSS_SELECTOR, "[data-test='inventory-item-price']")
     INVENTORY_ITEM_NAME = (By.CSS_SELECTOR, "[data-test='inventory-item-name']")
+    ADD_TO_CART_BUTTON = (By.CSS_SELECTOR, "[data-test='add-to-cart-sauce-labs-backpack']")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -30,8 +31,8 @@ class InventoryPage(BasePage):
 
     def check_items_sorting_by(self, sort_type):
         if sort_type in (
-            SORT_TYPES["price_low_to_high"],
-            SORT_TYPES["price_high_to_low"]
+                SORT_TYPES["price_low_to_high"],
+                SORT_TYPES["price_high_to_low"]
         ):
             actual_items = self.formate_prices()
         else:
@@ -44,3 +45,8 @@ class InventoryPage(BasePage):
         )
 
         assert actual_items == sorted(actual_items, reverse=reverse)
+
+    def get_all_add_to_cart_buttons(self):
+        buttons = self.driver.find_elements(*self.ADD_TO_CART_BUTTON)
+        for button in buttons:
+            print(button.text)
