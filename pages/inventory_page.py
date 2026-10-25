@@ -1,3 +1,4 @@
+import random
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from selenium.webdriver.support.ui import Select
@@ -10,7 +11,7 @@ class InventoryPage(BasePage):
     INVENTORY_ITEM = (By.CSS_SELECTOR, "[data-test='inventory-item']")
     INVENTORY_ITEM_PRICE = (By.CSS_SELECTOR, "[data-test='inventory-item-price']")
     INVENTORY_ITEM_NAME = (By.CSS_SELECTOR, "[data-test='inventory-item-name']")
-    ADD_TO_CART_BUTTON = (By.CSS_SELECTOR, "[data-test='add-to-cart-sauce-labs-backpack']")
+    ADD_TO_CART_BUTTON = (By.CSS_SELECTOR, "[data-test^='add-to-cart-']")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -46,7 +47,16 @@ class InventoryPage(BasePage):
 
         assert actual_items == sorted(actual_items, reverse=reverse)
 
-    def get_all_add_to_cart_buttons(self):
-        buttons = self.driver.find_elements(*self.ADD_TO_CART_BUTTON)
-        for button in buttons:
-            print(button.text)
+    def get_all_items(self):
+        return self.driver.find_elements(*self.INVENTORY_ITEM)
+
+    def get_random_item_index(self):
+        items = self.get_all_items()
+        index = random.randrange(len(items))
+        return index
+
+    def add_random_item_to_cart(self):
+        items = self.get_all_items()
+        index = self.get_random_item_index()
+
+        items[index].find_element(*self.ADD_TO_CART_BUTTON).click()
