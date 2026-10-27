@@ -31,19 +31,20 @@ class InventoryPage(BasePage):
         select_field.select_by_value(sort_type)
 
     def check_items_sorting_by(self, sort_type):
-        if sort_type in (
-                SORT_TYPES["price_low_to_high"],
-                SORT_TYPES["price_high_to_low"]
-        ):
+        is_price_sort = sort_type in {
+            SORT_TYPES["price_low_to_high"],
+            SORT_TYPES["price_high_to_low"],
+        }
+        reverse = sort_type in {
+            SORT_TYPES["price_high_to_low"],
+            SORT_TYPES["name_z_to_a"],
+        }
+
+        if is_price_sort:
             actual_items = self.formate_prices()
         else:
             inventory_names_elements = self.driver.find_elements(*self.INVENTORY_ITEM_NAME)
             actual_items = [name.text for name in inventory_names_elements]
-
-        reverse = sort_type in (
-            SORT_TYPES["price_high_to_low"],
-            SORT_TYPES["name_z_to_a"]
-        )
 
         assert actual_items == sorted(actual_items, reverse=reverse)
 
