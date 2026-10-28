@@ -3,6 +3,8 @@ import dotenv
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+from components.header_component import HeaderComponent
+
 dotenv.load_dotenv()
 
 class BasePage:
@@ -30,3 +32,7 @@ class BasePage:
 
     def get_text(self, locator):
         return self.find(locator).text
+
+    @property
+    def header(self):
+        return HeaderComponent(page=self)
