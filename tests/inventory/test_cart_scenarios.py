@@ -10,3 +10,9 @@ def test_add_item_to_cart_and_check_cart(auth_inventory_page, shopping_cart_page
     auth_inventory_page.header.click_cart_button()
 
     assert auth_inventory_page.last_added_to_cart_item_name in shopping_cart_page.get_all_item_names_in_cart()
+
+def test_check_continue_shopping_button(auth_inventory_page, shopping_cart_page):
+    auth_inventory_page.header.click_cart_button()
+    shopping_cart_page.click_continue_shopping_button()
+
+    assert auth_inventory_page.is_inventory_visible()
