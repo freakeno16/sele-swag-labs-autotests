@@ -49,7 +49,7 @@ class InventoryPage(BasePage):
         assert actual_items == sorted(actual_items, reverse=reverse)
 
     def get_all_items(self):
-        return self.driver.find_elements(*self.INVENTORY_ITEM)
+        return self.find_all(self.INVENTORY_ITEM)
 
     def get_random_item_index(self):
         items = self.get_all_items()
