@@ -18,8 +18,8 @@ class InventoryPage(BasePage):
         self.endpoint = "inventory.html"
         self.last_added_to_cart_item_name = None
 
-    def check_inventory_is_visible(self):
-        assert self.find(self.INVENTORY).is_displayed()
+    def is_inventory_visible(self):
+        return self.find(self.INVENTORY).is_displayed()
 
     def formate_prices(self):
         inventory_prices = self.driver.find_elements(*self.INVENTORY_ITEM_PRICE)
