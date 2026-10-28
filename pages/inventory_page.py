@@ -16,6 +16,7 @@ class InventoryPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
         self.endpoint = "inventory.html"
+        self.last_added_to_cart_item_name = None
 
     def check_inventory_is_visible(self):
         assert self.find(self.INVENTORY).is_displayed()
@@ -57,8 +58,10 @@ class InventoryPage(BasePage):
         return index
 
     def add_random_item_to_cart(self):
-        items = self.find_all(self.INVENTORY_ITEM)
+        items = self.get_all_items()
         index = random.randrange(len(items))
         random_item = items[index]
+
+        self.last_added_to_cart_item_name = random_item.find_element(*self.INVENTORY_ITEM_NAME).text
 
         random_item.find_element(*self.ADD_TO_CART_BUTTON).click()
