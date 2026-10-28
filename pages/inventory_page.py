@@ -57,7 +57,8 @@ class InventoryPage(BasePage):
         return index
 
     def add_random_item_to_cart(self):
-        items = self.get_all_items()
-        index = self.get_random_item_index()
+        items = self.find_all(self.INVENTORY_ITEM)
+        index = random.randrange(len(items))
+        random_item = items[index]
 
-        items[index].find_element(*self.ADD_TO_CART_BUTTON).click()
+        random_item.find_element(*self.ADD_TO_CART_BUTTON).click()
