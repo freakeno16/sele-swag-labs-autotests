@@ -2,7 +2,6 @@ import os
 import dotenv
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-
 from components.header_component import HeaderComponent
 
 dotenv.load_dotenv()
