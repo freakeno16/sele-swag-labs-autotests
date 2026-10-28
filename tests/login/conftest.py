@@ -1,7 +1,7 @@
 import os
 import pytest
 import dotenv
-from test_data.login.error_messages import error_messages
+from data.login.error_messages import error_messages
 
 dotenv.load_dotenv()
 

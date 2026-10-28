@@ -1,4 +1,4 @@
-from test_data.inventory.sort_types import SORT_TYPES
+from data.inventory.sort_types import SORT_TYPES
 
 
 def test_sort_items_by_price_from_low_to_high(auth_inventory_page):

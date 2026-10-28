@@ -2,7 +2,7 @@ import random
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from selenium.webdriver.support.ui import Select
-from test_data.inventory.sort_types import SORT_TYPES
+from data.inventory.sort_types import SORT_TYPES
 
 
 class InventoryPage(BasePage):
