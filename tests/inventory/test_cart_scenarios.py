@@ -1,5 +1,3 @@
-import time
-
 def test_add_item_to_cart_and_check_cart_badge(auth_inventory_page):
     auth_inventory_page.add_random_item_to_cart()
 
