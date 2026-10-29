@@ -10,6 +10,12 @@ def test_successful_login_with_valid_creds(
 
     assert inventory_page.is_inventory_visible()
 
+def test_logout_after_successful_login(auth_inventory_page, login_page):
+    auth_inventory_page.header.click_burger_menu_button()
+    auth_inventory_page.sidebar.click_logout_button()
+
+    assert login_page.is_login_logo_visible()
+
 def test_unsuccessful_login_with_invalid_username(
     login_page,
     invalid_creds,
