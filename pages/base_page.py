@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from components.footer_component import FooterComponent
 from components.header_component import HeaderComponent
+from components.sidebar_component import SidebarComponent
 
 dotenv.load_dotenv()
 
@@ -41,3 +42,7 @@ class BasePage:
     @property
     def footer(self):
         return FooterComponent(page=self)
+
+    @property
+    def sidebar(self):
+        return SidebarComponent(page=self)
