@@ -26,5 +26,5 @@ class LoginPage(BasePage):
     def click_submit_button(self):
         self.click(self.SUBMIT_BUTTON)
 
-    def check_error_message(self, error_text):
-        assert self.get_text(self.ERROR_MESSAGE) == error_text
+    def get_error_text(self):
+        return self.get_text(self.ERROR_MESSAGE)
