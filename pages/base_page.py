@@ -2,6 +2,8 @@ import os
 import dotenv
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+
+from components.footer_component import FooterComponent
 from components.header_component import HeaderComponent
 
 dotenv.load_dotenv()
@@ -35,3 +37,7 @@ class BasePage:
     @property
     def header(self):
         return HeaderComponent(page=self)
+
+    @property
+    def footer(self):
+        return FooterComponent(page=self)
