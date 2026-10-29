@@ -7,6 +7,7 @@ class LoginPage(BasePage):
     PASSWORD_INPUT = (By.ID, "password")
     SUBMIT_BUTTON = (By.ID, "login-button")
     ERROR_MESSAGE = (By.CLASS_NAME, "error-message-container")
+    LOGIN_LOGO = (By.CLASS_NAME, "login_logo")
 
     def __init__(self, driver):
         super().__init__(driver)
@@ -28,3 +29,6 @@ class LoginPage(BasePage):
 
     def get_error_text(self):
         return self.get_text(self.ERROR_MESSAGE)
+
+    def is_login_logo_visible(self):
+        return self.find(self.LOGIN_LOGO).is_displayed()
