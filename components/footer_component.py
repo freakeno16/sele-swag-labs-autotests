@@ -6,4 +6,3 @@ class FooterComponent(BaseComponent):
 
     def get_copyright_text(self):
         return self.page.get_text(self.COPYRIGHT)
-
