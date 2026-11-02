@@ -4,5 +4,5 @@ from selenium.webdriver.common.by import By
 class FooterComponent(BaseComponent):
     COPYRIGHT = (By.CSS_SELECTOR, '[data-test="footer-copy"]')
 
-    def get_copyright_text(self):
+    def get_copyright_text(self) -> str:
         return self.page.get_text(self.COPYRIGHT)
