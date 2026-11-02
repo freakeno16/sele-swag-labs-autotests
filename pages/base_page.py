@@ -2,7 +2,6 @@ import os
 import dotenv
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
-
 from components.footer_component import FooterComponent
 from components.header_component import HeaderComponent
 from components.sidebar_component import SidebarComponent
