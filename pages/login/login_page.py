@@ -1,5 +1,6 @@
-from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
+from selenium.webdriver.remote.webdriver import WebDriver
+from pages.base_page import BasePage
 from pages.inventory_page import InventoryPage
 
 
@@ -10,28 +11,27 @@ class LoginPage(BasePage):
     ERROR_MESSAGE = (By.CLASS_NAME, "error-message-container")
     LOGIN_LOGO = (By.CLASS_NAME, "login_logo")
 
-    def __init__(self, driver):
+    def __init__(self, driver: WebDriver) -> None:
         super().__init__(driver)
-        self.endpoint = ""
+        self.endpoint: str = ""
 
-    def login(self, username, password):
+    def login(self, username: str, password: str) -> None:
         self.fill_username_field(username)
         self.fill_password_field(password)
         self.click_submit_button()
 
-    def fill_username_field(self, username):
+    def fill_username_field(self, username: str) -> None:
         self.find(self.USERNAME_INPUT).send_keys(username)
 
-    def fill_password_field(self, password):
+    def fill_password_field(self, password: str) -> None:
         self.find(self.PASSWORD_INPUT).send_keys(password)
 
     def click_submit_button(self) -> InventoryPage:
         self.click(self.SUBMIT_BUTTON)
-
         return InventoryPage(self.driver)
 
-    def get_error_text(self):
+    def get_error_text(self) -> str:
         return self.get_text(self.ERROR_MESSAGE)
 
-    def is_login_logo_visible(self):
+    def is_login_logo_visible(self) -> bool:
         return self.find(self.LOGIN_LOGO).is_displayed()
