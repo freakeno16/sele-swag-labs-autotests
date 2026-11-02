@@ -7,7 +7,7 @@ class HeaderComponent(BaseComponent):
     CART_BADGE = (By.CLASS_NAME, "shopping_cart_badge")
     BURGER_MENU_BUTTON = (By.CLASS_NAME, 'bm-burger-button')
 
-    def click_cart_button(self):
+    def click_cart_button(self) -> None:
         self.page.click(self.CART_BUTTON)
 
     def get_cart_badge_number(self):
