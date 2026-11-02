@@ -1,5 +1,4 @@
 from pages.shopping_cart_page import ShoppingCartPage
-from tests.conftest import shopping_cart_page
 
 
 def test_add_item_to_cart_and_check_cart_badge(auth_inventory_page):
