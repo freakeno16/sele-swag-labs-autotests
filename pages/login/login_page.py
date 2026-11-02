@@ -1,5 +1,6 @@
 from pages.base_page import BasePage
 from selenium.webdriver.common.by import By
+from pages.inventory_page import InventoryPage
 
 
 class LoginPage(BasePage):
@@ -24,8 +25,10 @@ class LoginPage(BasePage):
     def fill_password_field(self, password):
         self.find(self.PASSWORD_INPUT).send_keys(password)
 
-    def click_submit_button(self):
+    def click_submit_button(self) -> InventoryPage:
         self.click(self.SUBMIT_BUTTON)
+
+        return InventoryPage(self.driver)
 
     def get_error_text(self):
         return self.get_text(self.ERROR_MESSAGE)
