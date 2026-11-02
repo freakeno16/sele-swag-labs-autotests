@@ -1,3 +1,6 @@
+from pages.login.login_page import LoginPage
+
+
 def test_successful_login_with_valid_creds(
     login_page,
     valid_creds
@@ -9,9 +12,11 @@ def test_successful_login_with_valid_creds(
 
     assert inventory_page.is_inventory_visible()
 
-def test_logout_after_successful_login(auth_inventory_page, login_page):
+def test_logout_after_successful_login(auth_inventory_page):
     auth_inventory_page.header.click_burger_menu_button()
     auth_inventory_page.sidebar.click_logout_button()
+
+    login_page = LoginPage(auth_inventory_page.driver)
 
     assert login_page.is_login_logo_visible()
 
