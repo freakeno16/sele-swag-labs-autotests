@@ -1,4 +1,6 @@
 import random
+from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from selenium.webdriver.support.ui import Select
@@ -13,25 +15,25 @@ class InventoryPage(BasePage):
     INVENTORY_ITEM_NAME = (By.CSS_SELECTOR, "[data-test='inventory-item-name']")
     ADD_TO_CART_BUTTON = (By.CSS_SELECTOR, "[data-test^='add-to-cart-']")
 
-    def __init__(self, driver):
+    def __init__(self, driver: WebDriver) -> None:
         super().__init__(driver)
         self.endpoint = "inventory.html"
         self.last_added_to_cart_item_name = None
 
-    def is_inventory_visible(self):
+    def is_inventory_visible(self) -> bool:
         return self.find(self.INVENTORY).is_displayed()
 
-    def formate_prices(self):
+    def formate_prices(self) -> list[float]:
         inventory_prices = self.driver.find_elements(*self.INVENTORY_ITEM_PRICE)
         formatted_prices = [float(price.text.replace('$', '')) for price in inventory_prices]
 
         return formatted_prices
 
-    def sort_items_by(self, sort_type):
+    def sort_items_by(self, sort_type: str) -> None:
         select_field = Select(self.find(self.SORT_SELECT_FIELD))
         select_field.select_by_value(sort_type)
 
-    def get_items_sorted_by(self, sort_type):
+    def get_items_sorted_by(self, sort_type: str) -> list[float | str]:
         is_price_sort = sort_type in {
             SORT_TYPES["price_low_to_high"],
             SORT_TYPES["price_high_to_low"],
@@ -45,15 +47,15 @@ class InventoryPage(BasePage):
 
         return actual_items
 
-    def get_all_items(self):
+    def get_all_items(self) -> list[WebElement]:
         return self.find_all(self.INVENTORY_ITEM)
 
-    def get_random_item_index(self):
+    def get_random_item_index(self) -> int:
         items = self.get_all_items()
         index = random.randrange(len(items))
         return index
 
-    def add_random_item_to_cart(self):
+    def add_random_item_to_cart(self) -> None:
         items = self.get_all_items()
         index = random.randrange(len(items))
         random_item = items[index]
