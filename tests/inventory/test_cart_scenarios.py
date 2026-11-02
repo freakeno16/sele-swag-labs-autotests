@@ -1,4 +1,5 @@
 from pages.shopping_cart_page import ShoppingCartPage
+from tests.conftest import shopping_cart_page
 
 
 def test_add_item_to_cart_and_check_cart_badge(auth_inventory_page):
@@ -14,8 +15,11 @@ def test_add_item_to_cart_and_check_cart(auth_inventory_page):
 
     assert auth_inventory_page.last_added_to_cart_item_name in shopping_cart_page.get_all_item_names_in_cart()
 
-def test_check_continue_shopping_button(auth_inventory_page, shopping_cart_page):
+def test_check_continue_shopping_button(auth_inventory_page):
     auth_inventory_page.header.click_cart_button()
+
+    shopping_cart_page = ShoppingCartPage(auth_inventory_page.driver)
+
     shopping_cart_page.click_continue_shopping_button()
 
     assert auth_inventory_page.is_inventory_visible()

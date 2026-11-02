@@ -10,8 +10,8 @@ class HeaderComponent(BaseComponent):
     def click_cart_button(self) -> None:
         self.page.click(self.CART_BUTTON)
 
-    def get_cart_badge_number(self):
+    def get_cart_badge_number(self) -> int:
         return int(self.page.get_text(self.CART_BADGE))
 
-    def click_burger_menu_button(self):
+    def click_burger_menu_button(self) -> None:
         self.page.click(self.BURGER_MENU_BUTTON)
