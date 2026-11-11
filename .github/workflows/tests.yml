@@ -1,0 +1,45 @@
+name: UI Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Create .env from secrets
+        run: |
+          cat > .env <<EOF
+          BASE_URL=${{ secrets.BASE_URL }}
+          STANDARD_USER_USERNAME=${{ secrets.STANDARD_USER_USERNAME }}
+          PASSWORD=${{ secrets.PASSWORD }}
+          INVALID_STANDARD_USER_USERNAME=${{ secrets.INVALID_STANDARD_USER_USERNAME }}
+          INVALID_PASSWORD=${{ secrets.INVALID_PASSWORD }}
+          EOF
+
+      - name: Run tests
+        run: pytest -vs
+
+      - name: Upload test artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pytest-results
+          path: .pytest_cache/
