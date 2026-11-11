@@ -1,5 +1,6 @@
 import os
 import dotenv
+from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
@@ -12,6 +13,7 @@ dotenv.load_dotenv()
 
 class BasePage:
     BASE_URL = os.getenv("BASE_URL")
+    INVENTORY_ITEM_PRICE = (By.CSS_SELECTOR, "[data-test='inventory-item-price']")
 
     Locator = tuple[str, str]
 
@@ -37,6 +39,13 @@ class BasePage:
 
     def get_text(self, locator: Locator) -> str:
         return self.find(locator).text
+
+    def formate_prices(self) -> list[float]:
+        self.wait.until(EC.visibility_of_all_elements_located(self.INVENTORY_ITEM_PRICE))
+        inventory_prices = self.driver.find_elements(*self.INVENTORY_ITEM_PRICE)
+        formatted_prices = [float(price.text.replace('$', '')) for price in inventory_prices]
+
+        return formatted_prices
 
     @property
     def header(self) -> HeaderComponent:

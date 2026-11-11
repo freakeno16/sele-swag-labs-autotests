@@ -11,7 +11,7 @@ class InventoryPage(BasePage):
     INVENTORY = (By.CSS_SELECTOR, "[data-test='inventory-list']")
     SORT_SELECT_FIELD = (By.CSS_SELECTOR, "[data-test='product-sort-container']")
     INVENTORY_ITEM = (By.CSS_SELECTOR, "[data-test='inventory-item']")
-    INVENTORY_ITEM_PRICE = (By.CSS_SELECTOR, "[data-test='inventory-item-price']")
+    # INVENTORY_ITEM_PRICE = (By.CSS_SELECTOR, "[data-test='inventory-item-price']")
     INVENTORY_ITEM_NAME = (By.CSS_SELECTOR, "[data-test='inventory-item-name']")
     ADD_TO_CART_BUTTON = (By.CSS_SELECTOR, "[data-test^='add-to-cart-']")
 
@@ -23,11 +23,11 @@ class InventoryPage(BasePage):
     def is_inventory_visible(self) -> bool:
         return self.find(self.INVENTORY).is_displayed()
 
-    def formate_prices(self) -> list[float]:
-        inventory_prices = self.driver.find_elements(*self.INVENTORY_ITEM_PRICE)
-        formatted_prices = [float(price.text.replace('$', '')) for price in inventory_prices]
-
-        return formatted_prices
+    # def formate_prices(self) -> list[float]:
+    #     inventory_prices = self.driver.find_elements(*self.INVENTORY_ITEM_PRICE)
+    #     formatted_prices = [float(price.text.replace('$', '')) for price in inventory_prices]
+    #
+    #     return formatted_prices
 
     def sort_items_by(self, sort_type: str) -> None:
         select_field = Select(self.find(self.SORT_SELECT_FIELD))
