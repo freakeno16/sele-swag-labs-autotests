@@ -15,6 +15,5 @@ def test_checkout_total_sum_with_empty_cart(auth_inventory_page):
     checkout_page_step_one.fill_postal_code_field(checkout_userdata.postal_code)
     checkout_page_step_one.click_continue_button()
     checkout_page_step_two = CheckoutPageStepTwo(checkout_page_step_one.driver)
-    checkout_page_step_two.get_total_sum()
 
     assert checkout_page_step_two.get_total_sum() == '0.00'
