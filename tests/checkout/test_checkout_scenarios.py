@@ -16,7 +16,7 @@ def test_checkout_with_empty_cart_has_zero_total(auth_inventory_page):
     checkout_page_step_one.click_continue_button()
     checkout_page_step_two = CheckoutPageStepTwo(checkout_page_step_one.driver)
 
-    assert checkout_page_step_two.get_total_sum() == '0.00'
+    assert checkout_page_step_two.get_total_sum() == 0.00
 
 def test_single_item_total_is_sum_of_price_and_tax(auth_inventory_page):
     auth_inventory_page.add_random_item_to_cart()
