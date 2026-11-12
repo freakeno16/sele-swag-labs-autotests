@@ -10,3 +10,9 @@ class BaseCheckoutPage(BasePage):
 
     def click_cancel_button(self):
         self.click(self.CANCEL_BUTTON)
+
+    def get_formatted_price(self, locator) -> float:
+        text = self.get_text(locator)
+        formatted = text.replace("Total: ", "").replace("Tax: ", "").replace("$", "").replace(",", "")
+
+        return float(formatted)
