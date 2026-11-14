@@ -1,6 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from pages.checkout_form_pages.base_checkout_page import BaseCheckoutPage
+from pages.checkout_form_pages.checkout_complete_page import CheckoutCompletePage
 
 
 class CheckoutPageStepTwo(BaseCheckoutPage):
@@ -13,8 +14,10 @@ class CheckoutPageStepTwo(BaseCheckoutPage):
         super().__init__(driver)
         self.endpoint = 'checkout-step-two.html'
 
-    def click_finish_button(self):
+    def click_finish_button(self) -> CheckoutCompletePage:
         self.click(self.FINISH_BUTTON)
+
+        return CheckoutCompletePage(self.driver)
 
     def get_total_sum(self):
         return self.get_formatted_price(self.TOTAL_SUM_LABEL)
