@@ -8,14 +8,12 @@ def test_empty_cart_has_zero_total_with_no_items(auth_inventory_page):
     auth_inventory_page.header.click_cart_button()
 
     shopping_cart_page = ShoppingCartPage(auth_inventory_page.driver)
-    shopping_cart_page.click_checkout_button()
+    checkout_page_step_one = shopping_cart_page.click_checkout_button()
 
-    checkout_page_step_one = CheckoutPageStepOne(shopping_cart_page.driver)
     checkout_page_step_one.fill_firstname_field(checkout_userdata.first_name)
     checkout_page_step_one.fill_lastname_field(checkout_userdata.last_name)
     checkout_page_step_one.fill_postal_code_field(checkout_userdata.postal_code)
-    checkout_page_step_one.click_continue_button()
-    checkout_page_step_two = CheckoutPageStepTwo(checkout_page_step_one.driver)
+    checkout_page_step_two = checkout_page_step_one.click_continue_button()
 
     assert checkout_page_step_two.get_total_sum() == 0.00
 
