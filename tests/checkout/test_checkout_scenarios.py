@@ -1,6 +1,3 @@
-from pages.checkout_form_pages.checkout_complete_page import CheckoutCompletePage
-from pages.checkout_form_pages.step_one_checkout_page import CheckoutPageStepOne
-from pages.checkout_form_pages.step_two_checkout_page import CheckoutPageStepTwo
 from pages.shopping_cart_page import ShoppingCartPage
 from data import checkout_userdata
 
