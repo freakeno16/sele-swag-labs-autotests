@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
+from pages.shopping_cart_page import ShoppingCartPage
 
 
 class BaseCheckoutPage(BasePage):
@@ -8,8 +9,10 @@ class BaseCheckoutPage(BasePage):
     def __init__(self, driver):
         super().__init__(driver)
 
-    def click_cancel_button(self):
+    def click_cancel_button(self) -> ShoppingCartPage:
         self.click(self.CANCEL_BUTTON)
+
+        return ShoppingCartPage(self.driver)
 
     def get_formatted_price(self, locator) -> float:
         text = self.get_text(locator)
