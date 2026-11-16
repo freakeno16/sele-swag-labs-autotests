@@ -4,7 +4,7 @@ from pages.checkout_form_pages.step_two_checkout_page import CheckoutPageStepTwo
 from pages.shopping_cart_page import ShoppingCartPage
 from data import checkout_userdata
 
-def test_checkout_with_empty_cart_has_zero_total(auth_inventory_page):
+def test_empty_cart_has_zero_total_with_no_items(auth_inventory_page):
     auth_inventory_page.header.click_cart_button()
 
     shopping_cart_page = ShoppingCartPage(auth_inventory_page.driver)
